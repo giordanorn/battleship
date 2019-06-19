@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>       // -FUNDAMENTAL PARA GERAR VALORES ALEEARTORIOS
-#include <dos.h>        // -FUNDAMENTAIS PARA
-#include <windows.h>    //  USAR OS BEEPS
+
 #define LIN 17
 #define COL 17
 
 typedef enum tab_player{
-    WATER, //ÁGUA
+    WATER, //ï¿½GUA
     N1,    //NAVIOS DE TAMANHO 1 2 3 E 4;
     N2,
     N3,
@@ -16,7 +15,7 @@ typedef enum tab_player{
 }PLAYER;
 
 int basePL[LIN][COL];                       //MATRIZ DE BASE
-char tabPL[LIN][COL];                       //MATRIZ CHAR QUE SERÁ IMPRESSA
+char tabPL[LIN][COL];                       //MATRIZ CHAR QUE SERï¿½ IMPRESSA
 
 int i,j;                                    //COORDENADAS DO JOGADOR
 int PLc1,PLc2,PLc3,PLc4,winPL;              //CONTADORES DO JOGADOR

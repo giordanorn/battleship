@@ -23,9 +23,9 @@ void Instrucoes(){
     system("pause");
     system("cls");
 }
-int Menu(){                                     // MENU DE OPÇÕES
+int Menu(){                                     // MENU DE OPï¿½ï¿½ES
     system("color 0f");
-    char s[2]={0,0};                        //CHAR QUE SERÁ SCANEADO
+    char s[2]={0,0};                        //CHAR QUE SERï¿½ SCANEADO
     while((s[0]<'1'||s[0]>'5')||s[1]!=0){
         s[1]=0;
         system("cls");
@@ -44,15 +44,15 @@ int Menu(){                                     // MENU DE OPÇÕES
         printf("Digite um valor referente ao menu (1 a 5): ");
         scanf("%s",&s);
     }
-    switch(s[0]){           // SWITCH DO MENU DE OPÇÕES
+    switch(s[0]){           // SWITCH DO MENU DE OPï¿½ï¿½ES
         case '1':
-            return 0;       // RETORNA ZERO PARA A FUNÇÃO, FAZENDO COM QUE O WHILE DO main.c SEJA ENCERRADO
+            return 0;       // RETORNA ZERO PARA A FUNï¿½ï¿½O, FAZENDO COM QUE O WHILE DO main.c SEJA ENCERRADO
         case '2':
             Load=1;
-             // CHAMA A FUNÇÃO QUE CARREGA O JOGO ANTERIOR
+             // CHAMA A FUNï¿½ï¿½O QUE CARREGA O JOGO ANTERIOR
             return 0;
         case '3':
-            Instrucoes();   // CHAMA AS INSTRUÇÕES, RETORNA 1 PARA VOLTAR PRO MENU
+            Instrucoes();   // CHAMA AS INSTRUï¿½ï¿½ES, RETORNA 1 PARA VOLTAR PRO MENU
             return 1;
         case '4':
             if(GeraAuto==0)
@@ -69,7 +69,7 @@ int Menu(){                                     // MENU DE OPÇÕES
     return 0;
 }
 void linha(){                                   // DA SCAN NA LINHA DO JOGADOR
-    char a[3]={0,0,0};                  // CHAR DE TAMANHO 3 POIS SÃO 2 CARACTERES EM (10~15),O 3º SERVE PRA GARANTIR QUE NÃO FORAM INSERIDOS MAIS DE 2 CARACTERES
+    char a[3]={0,0,0};                  // CHAR DE TAMANHO 3 POIS Sï¿½O 2 CARACTERES EM (10~15),O 3ï¿½ SERVE PRA GARANTIR QUE Nï¿½O FORAM INSERIDOS MAIS DE 2 CARACTERES
     printf("Informe a Linha (1 a 15): ");
     scanf("%s",&a);
     while((a[0]<='0'||a[0]>'9')||(a[0]=='1'&&a[1]>'5')||(a[0]!='1'&&a[1]!=0)||a[2]!=0){
@@ -240,7 +240,7 @@ void coluna(){                                  // DA SCAN NA COLUNA DO JOGADOR
     }
 }
 void TiroCerto(){                               // PISCA A TELA EM BRANCO E FAZ SOM
-    Beep(500,50);
+    ////Beep(500,50);
     system("color f0");
     system("color f");
     system("color f0");
@@ -396,7 +396,7 @@ void ImprimeMapa(){                             // IMPRIME OS MAPA DO PLAYER
         printf("\n");
     }
 }
-void ImprimeMapas(){                            // IMPRIME AMBOS OS MAPAS JÁ FORMATADOS
+void ImprimeMapas(){                            // IMPRIME AMBOS OS MAPAS Jï¿½ FORMATADOS
     system("cls");
     printf("\t      JOGADOR\n");
     ImprimeMapa();
@@ -466,7 +466,7 @@ void GeraNavios(int base[][COL]){               // GERA OS NAVIOS AUTOMATICAMENT
             do{
                 i=(rand()%(LIN-2))+1;
                 j=(rand()%(COL-4))+1;
-            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIÇÕES
+            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIï¿½ï¿½ES
             base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||
             base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0);
 
@@ -480,7 +480,7 @@ void GeraNavios(int base[][COL]){               // GERA OS NAVIOS AUTOMATICAMENT
                 j=(rand()%(COL-2))+1;
             }while(base[i][j]!=0||base[i-1][j]!=0||base[i+1][j]!=0||base[i+2][j]!=0||base[i+3][j]!=0||
             base[i][j+1]!=0||base[i-1][j+1]!=0||base[i+1][j+1]!=0||base[i+2][j+1]!=0||base[i+3][j+1]!=0||
-            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0);  // EVITAR REPETIÇÕES
+            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0);  // EVITAR REPETIï¿½ï¿½ES
 
             base[i][j]=N3;
             base[i+1][j]=N3;
@@ -493,7 +493,7 @@ void GeraNavios(int base[][COL]){               // GERA OS NAVIOS AUTOMATICAMENT
             do{
                 i=(rand()%(LIN-2))+1;
                 j=(rand()%(COL-5))+1;
-            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIÇÕES
+            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIï¿½ï¿½ES
             base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||base[i-1][j+4]!=0||
             base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0||base[i+1][j+4]!=0);
 
@@ -548,14 +548,14 @@ void FormaMapa(char tab[][COL]){                // DA FORMATO AOS MAPAS
     tab[LIN-1][COL-1]=' ';
 }
 
-                                    /* FUNÇÕES USADAS QUANDO O JOGADOR ESCOLHE A POSIÇÃO DOS NAVIOS */
+                                    /* FUNï¿½ï¿½ES USADAS QUANDO O JOGADOR ESCOLHE A POSIï¿½ï¿½O DOS NAVIOS */
 int VH(){                               // ESCOLHE SE O NAVIO FICA NA HORIZONTAL OU VERTICAL
     char s[2]={0,0};
     do{
         s[1]=0;
         printf("Navio na vertical ou horizontal(V/H): ");
         scanf("%s",&s);
-    }while((s[0]!='v'&&s[0]!='V'&&s[0]!='h'&&s[0]!='H')||s[1]!=0); //SÓ VAI SAIR DA CONDIÇÃO QUANDO FOR DIGITADO V,v,H OU h
+    }while((s[0]!='v'&&s[0]!='V'&&s[0]!='h'&&s[0]!='H')||s[1]!=0); //Sï¿½ VAI SAIR DA CONDIï¿½ï¿½O QUANDO FOR DIGITADO V,v,H OU h
     if(s[0]=='v'||s[0]=='V'){
         return 1;
     }
@@ -733,7 +733,7 @@ void ImprimeEscolheNavio(){             // IMPRIME OS NAVIOS QUE FORAM ESCOLHIDO
         printf("\n");
     }
 }
-void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT), E TABULEIRO(CHAR) (USA A MESMA LÓGICA DA FUNÇÃO GeraNavios)
+void EscolheNavios(int base[][COL]){    // Pï¿½E OS NAVIOS NA MATRIZ DE BASE(INT), E TABULEIRO(CHAR) (USA A MESMA Lï¿½GICA DA FUNï¿½ï¿½O GeraNavios)
     int v,c,i,j;
     for(c=1;c;c--){               // ESCOLHE PORTA-AVIOES(NAVIO DE 4)
         system("cls");
@@ -743,7 +743,7 @@ void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT),
         if(v==0){                    //HORIZONTAL
             i=LinhaEscolherNavio(LIN-2);
             j=ColunaEscolherNavio(COL-5);
-            while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIÇÕES
+            while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIï¿½ï¿½ES
             base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||base[i-1][j+4]!=0||
             base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0||base[i+1][j+4]!=0){
                 printf("O navio esta sobreposto!\n");
@@ -760,8 +760,8 @@ void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT),
             j=ColunaEscolherNavio(COL-2);
             while(base[i][j]!=0||base[i-1][j]!=0||base[i+1][j]!=0||base[i+2][j]!=0||base[i+3][j]!=0||base[i+4][j]!=0||
                   base[i][j+1]!=0||base[i-1][j+1]!=0||base[i+1][j+1]!=0||base[i+2][j+1]!=0||base[i+3][j+1]!=0||base[i+4][j+1]!=0||
-                  base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0||base[i+4][j-1]!=0){  // evitar repetiçoes
-                printf("O navio está sobreposto!\n");
+                  base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0||base[i+4][j-1]!=0){  // evitar repetiï¿½oes
+                printf("O navio estï¿½ sobreposto!\n");
                 i=LinhaEscolherNavio(LIN-5);
                 j=ColunaEscolherNavio(COL-2);
             }
@@ -779,7 +779,7 @@ void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT),
         if(v==0){
             i=LinhaEscolherNavio(LIN-2);
             j=ColunaEscolherNavio(COL-4);
-            while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIÇÕES
+            while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIï¿½ï¿½ES
                   base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||
                   base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0){
                 printf("O navio esta sobreposto!\n");
@@ -796,7 +796,7 @@ void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT),
             j=ColunaEscolherNavio(COL-2);
             while(base[i][j]!=0||base[i-1][j]!=0||base[i+1][j]!=0||base[i+2][j]!=0||base[i+3][j]!=0||
                   base[i][j+1]!=0||base[i-1][j+1]!=0||base[i+1][j+1]!=0||base[i+2][j+1]!=0||base[i+3][j+1]!=0||
-                  base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0){  // EVITAR REPETIÇÕES
+                  base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0){  // EVITAR REPETIï¿½ï¿½ES
                 printf("O navio esta sobreposto!\n");
                 i=LinhaEscolherNavio(LIN-4);
                 j=ColunaEscolherNavio(COL-2);
@@ -832,7 +832,7 @@ void EscolheNavios(int base[][COL]){    // PÕE OS NAVIOS NA MATRIZ DE BASE(INT),
             j=ColunaEscolherNavio(COL-2);
             while(base[i][j]!=0||base[i-1][j]!=0||base[i+1][j]!=0||base[i+2][j]!=0||
             base[i][j+1]!=0||base[i-1][j+1]!=0||base[i+1][j+1]!=0||base[i+2][j+1]!=0||
-            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0){  // evitar repetiçoes
+            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0){  // evitar repetiï¿½oes
                 printf("O navio esta sobreposto!\n");
                 i=LinhaEscolherNavio(LIN-3);
                 j=ColunaEscolherNavio(COL-2);
@@ -882,7 +882,7 @@ void SalvaJogo(){
     for(i=1;i<LIN-1;i++){           // SALVA A MATRIZ CHAR DO PLAYER
         for(j=1;j<COL-1;j++){
             if(tabPL[i][j]==' '){
-                fprintf(arq,"-");       // O TIRO DADO NA ÁGUA É SALVO COMO - PARA NÃO HAVER PROBLEMA NA HORA DE DAR FSCANF ESPAÇOS(É CONVERTIDO DE VOLTA PARA ESPAÇO QUANDO LÊ)
+                fprintf(arq,"-");       // O TIRO DADO NA ï¿½GUA ï¿½ SALVO COMO - PARA Nï¿½O HAVER PROBLEMA NA HORA DE DAR FSCANF ESPAï¿½OS(ï¿½ CONVERTIDO DE VOLTA PARA ESPAï¿½O QUANDO Lï¿½)
                 continue;
             }
             fprintf(arq,"%c",tabPL[i][j]);
@@ -892,14 +892,14 @@ void SalvaJogo(){
     for(i=1;i<LIN-1;i++){           // SALVA A MATRIZ CHAR DO PLAYER
         for(j=1;j<COL-1;j++){
             if(tabIA[i][j]==' '){
-                fprintf(arq,"-");       // O TIRO DADO NA ÁGUA É SALVO COMO - PARA NÃO HAVER PROBLEMA NA HORA DE DAR FSCANF ESPAÇOS(É CONVERTIDO DE VOLTA PARA ESPAÇO QUANDO LÊ)
+                fprintf(arq,"-");       // O TIRO DADO NA ï¿½GUA ï¿½ SALVO COMO - PARA Nï¿½O HAVER PROBLEMA NA HORA DE DAR FSCANF ESPAï¿½OS(ï¿½ CONVERTIDO DE VOLTA PARA ESPAï¿½O QUANDO Lï¿½)
                 continue;
             }
             fprintf(arq,"%c",tabIA[i][j]);
         }
         fprintf(arq,"\n");
     }
-    fprintf(arq,"%i %i %i %i %i %i %i %i %i %i %i %i %i",PLc1,PLc2,PLc3,PLc4,IAc1,IAc2,IAc3,IAc4,x,y,z,I,J); // SALVA OS CONTADORES E AS POSIÇOES DOS TIROS DA IA
+    fprintf(arq,"%i %i %i %i %i %i %i %i %i %i %i %i %i",PLc1,PLc2,PLc3,PLc4,IAc1,IAc2,IAc3,IAc4,x,y,z,I,J); // SALVA OS CONTADORES E AS POSIï¿½OES DOS TIROS DA IA
     fclose(arq);
 }
 void CarregaJogo(){
@@ -921,7 +921,7 @@ void CarregaJogo(){
     for(i=1;i<LIN-1;i++){           // CARREGA A MATRIZ CHAR DO PLAYER
         for(j=1;j<COL-1;j++){
             fscanf(arq,"%c",&tabPL[i][j]);
-            if(tabPL[i][j]=='-'){           // CONVERSÃO DE - PARA ESPAÇO
+            if(tabPL[i][j]=='-'){           // CONVERSï¿½O DE - PARA ESPAï¿½O
                 tabPL[i][j]=' ';
             }
         }
@@ -930,13 +930,13 @@ void CarregaJogo(){
     for(i=1;i<LIN-1;i++){           // CARREGA A MATRIZ CHAR DO PLAYER
         for(j=1;j<COL-1;j++){
             fscanf(arq,"%c",&tabIA[i][j]);
-            if(tabIA[i][j]=='-'){           // CONVERSÃO DE - PARA ESPAÇO
+            if(tabIA[i][j]=='-'){           // CONVERSï¿½O DE - PARA ESPAï¿½O
                 tabIA[i][j]=' ';
             }
         }
         fscanf(arq,"\n");
     }
-    fscanf(arq,"%i%i%i%i%i%i%i%i%i%i%i%i%i",&PLc1,&PLc2,&PLc3,&PLc4,&IAc1,&IAc2,&IAc3,&IAc4,&x,&y,&z,&I,&J); // CARREGA OS CONTADORES E AS POSIÇOES DOS TIROS DA IA
+    fscanf(arq,"%i%i%i%i%i%i%i%i%i%i%i%i%i",&PLc1,&PLc2,&PLc3,&PLc4,&IAc1,&IAc2,&IAc3,&IAc4,&x,&y,&z,&I,&J); // CARREGA OS CONTADORES E AS POSIï¿½OES DOS TIROS DA IA
     fclose(arq);
 }
 void VerificaVencedor(int winner){
@@ -950,39 +950,39 @@ void VerificaVencedor(int winner){
     }
 }
 void SomDerrota(){
-    Beep (207,400);
-    Beep (196,400);
-    Beep (185,400);
-    Beep (174,1500);
+    //Beep (207,400);
+    //Beep (196,400);
+    //Beep (185,400);
+    //Beep (174,1500);
 }
 void SomVitoria(){
-    Beep (196,200);
-    Beep (262,200);
-    Beep (330,200);
-    Beep (392,200);
-    Beep (523,200);
-    Beep (660,200);
-    Beep (784,600);
-    Beep (660,600);
-    Beep (207,200);
-    Beep (262,200);
-    Beep (311,200);
-    Beep (415,200);
-    Beep (523,200);
-    Beep (622,200);
-    Beep (830,600);
-    Beep (622,600);
-    Beep (233,200);
-    Beep (294,200);
-    Beep (349,200);
-    Beep (466,200);
-    Beep (587,200);
-    Beep (698,200);
-    Beep (932,600);
-    Beep (932,200);
-    Beep (932,200);
-    Beep (932,200);
-    Beep (1046,900);
+    //Beep (196,200);
+    //Beep (262,200);
+    //Beep (330,200);
+    //Beep (392,200);
+    //Beep (523,200);
+    //Beep (660,200);
+    //Beep (784,600);
+    //Beep (660,600);
+    //Beep (207,200);
+    //Beep (262,200);
+    //Beep (311,200);
+    //Beep (415,200);
+    //Beep (523,200);
+    //Beep (622,200);
+    //Beep (830,600);
+    //Beep (622,600);
+    //Beep (233,200);
+    //Beep (294,200);
+    //Beep (349,200);
+    //Beep (466,200);
+    //Beep (587,200);
+    //Beep (698,200);
+    //Beep (932,600);
+    //Beep (932,200);
+    //Beep (932,200);
+    //Beep (932,200);
+    //Beep (1046,900);
 }
 void ApagaSave(){
     FILE *arq;
@@ -997,7 +997,7 @@ int JogarNovamente(){
         s[1]=0;
         printf("Deseja jogar novamente?(S/N)\n");
         scanf("%s",s);
-    }while((s[0]!='n'&&s[0]!='s'&&s[0]!='N'&&s[0]!='S')||s[1]!=0);     // SÓ SAI DA CONDIÇÃO QUANDO FOR DIGITADO S,s,N ou n
+    }while((s[0]!='n'&&s[0]!='s'&&s[0]!='N'&&s[0]!='S')||s[1]!=0);     // Sï¿½ SAI DA CONDIï¿½ï¿½O QUANDO FOR DIGITADO S,s,N ou n
     switch(s[0]){
         case 's':
             return 1;

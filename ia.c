@@ -1,7 +1,7 @@
 #include "player.h"
 #include "ia.h"
 
-int x=0,y=0,z=0,I,J;                          /* COORDENADAS DA IA, x,y= posição do primeiro disparo em um navio (usado para atirar do outro lado caso não destrua)
+int x=0,y=0,z=0,I,J;                          /* COORDENADAS DA IA, x,y= posiï¿½ï¿½o do primeiro disparo em um navio (usado para atirar do outro lado caso nï¿½o destrua)
                                                  z= AUXILIA A IA EM ATIRAR NOS REDORES CASO ACERTE UM TIRO, SE ACERTAR UM TIRO z VIRA VERDADEIRO */
 int IAc1=0,IAc2=0,IAc3=0,IAc4=0,winIA=0;        // CONTADORES DA IA
 
@@ -59,7 +59,7 @@ char colunaInimigo(int j){                      // CONVERTE A COLUNA DA IA PARA 
     return x;
 }
 void TiroCertoIA(){                             // PISCA A TELA EM VERMELHO E FAZ SOM
-    Beep(400,50);
+    //Beep(400,50);
     system("color 40");
     system("color C0");
     system("color 40");
@@ -76,7 +76,7 @@ void ZeraBaseIA(){                              // ZERA A MATRIZ DE BASE(INT) DA
         }
     }
 }
-void BordaBaseIA(){                             // DA VALOR "EDGE" ÀS BORDAS DA MATRIZ DE BASE(INT)
+void BordaBaseIA(){                             // DA VALOR "EDGE" ï¿½S BORDAS DA MATRIZ DE BASE(INT)
     int i,j;
     for(i=0;i<LIN;i++){                 // NUMERANDO AS BORDAS
         for(j=0;j<COL;j++){
@@ -88,7 +88,7 @@ void BordaBaseIA(){                             // DA VALOR "EDGE" ÀS BORDAS DA 
     }
 }
 void GeraNaviosIA(int base[][COL]){             // GERA OS NAVIOS DA IA ALEARTORIAMENTE
-    int v,c,i,j; // v=Navio na vertical ou horizontal, c= Limita quantas vezes vai repetir os laços, i,j= coordenadas
+    int v,c,i,j; // v=Navio na vertical ou horizontal, c= Limita quantas vezes vai repetir os laï¿½os, i,j= coordenadas
     for(c=0;c<4;c++){               // GERA SUBMARINOS(NAVIO DE 1)
             do{
                 i=(rand()%(LIN-2))+1;
@@ -130,7 +130,7 @@ void GeraNaviosIA(int base[][COL]){             // GERA OS NAVIOS DA IA ALEARTOR
             do{
                 i=(rand()%(LIN-2))+1;
                 j=(rand()%(COL-4))+1;
-            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIÇÕES
+            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0|| // EVITA REPETIï¿½ï¿½ES
             base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||
             base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0);
 
@@ -144,7 +144,7 @@ void GeraNaviosIA(int base[][COL]){             // GERA OS NAVIOS DA IA ALEARTOR
                 j=(rand()%(COL-2))+1;
             }while(base[i][j]!=0||base[i-1][j]!=0||base[i+1][j]!=0||base[i+2][j]!=0||base[i+3][j]!=0||
             base[i][j+1]!=0||base[i-1][j+1]!=0||base[i+1][j+1]!=0||base[i+2][j+1]!=0||base[i+3][j+1]!=0||
-            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0);  // EVITAR REPETIÇÕES
+            base[i][j-1]!=0||base[i-1][j-1]!=0||base[i+1][j-1]!=0||base[i+2][j-1]!=0||base[i+3][j-1]!=0);  // EVITAR REPETIï¿½ï¿½ES
 
             base[i][j]=N3;
             base[i+1][j]=N3;
@@ -157,7 +157,7 @@ void GeraNaviosIA(int base[][COL]){             // GERA OS NAVIOS DA IA ALEARTOR
             do{
                 i=(rand()%(LIN-2))+1;
                 j=(rand()%(COL-5))+1;
-            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIÇÕES
+            }while(base[i][j]!=0||base[i][j-1]!=0||base[i][j+1]!=0||base[i][j+2]!=0||base[i][j+3]!=0||base[i][j+4]!=0|| // EVITA REPETIï¿½ï¿½ES
             base[i-1][j]!=0||base[i-1][j-1]!=0||base[i-1][j+1]!=0||base[i-1][j+2]!=0||base[i-1][j+3]!=0||base[i-1][j+4]!=0||
             base[i+1][j]!=0||base[i+1][j-1]!=0||base[i+1][j+1]!=0||base[i+1][j+2]!=0||base[i+1][j+3]!=0||base[i+1][j+4]!=0);
 
@@ -240,26 +240,26 @@ void GeraTiroIA(int i,int j){                              // GERA AS COORDENADA
         j=(rand()%(COL-2))+1;
     }while(tabIA[i][j]!='~'||tabIA[i+1][j]=='x'||tabIA[i-1][j]=='x'||
     tabIA[i][j+1]=='x'||tabIA[i+1][j+1]=='x'||tabIA[i-1][j+1]=='x'||
-    tabIA[i][j-1]=='x'||tabIA[i+1][j-1]=='x'||tabIA[i-1][j-1]=='x');  // VERIFICA SE O TIRO JA FOI DADO NO LOCAL E SE ALGUM NAVIO ESTÁ NOS ARREDORES
+    tabIA[i][j-1]=='x'||tabIA[i+1][j-1]=='x'||tabIA[i-1][j-1]=='x');  // VERIFICA SE O TIRO JA FOI DADO NO LOCAL E SE ALGUM NAVIO ESTï¿½ NOS ARREDORES
     I=i;
     J=j;
 }
-void ProximoTiroIA(){                           // FUNÇÃO USADA PARA ATIRAR NOS ARREDORES
+void ProximoTiroIA(){                           // FUNï¿½ï¿½O USADA PARA ATIRAR NOS ARREDORES
     if(tabIA[I+1][y]=='~'&&tabIA[I][y]=='*'&&tabIA[I+2][y]!='x'){   // OLHA SE O TEM AGUA ABAIXO E SE ACERTOU O TIRO ANTERIOR
         ++I;
     }
-    else{                                                           // SE NÃO
+    else{                                                           // SE Nï¿½O
         if(tabIA[I][y]==' '||I==LIN-1||tabIA[I+1][y]==' '){             // OLHA SE ERROU O TIRO ANTERIOR
             I=x;                                                            //SE ERROU, IGUALA i AO VALOR DO PRIMEIRO TIRO ACERTADO
         }
         if(tabIA[I-1][y]=='~'&&tabIA[I][y]=='*'&&tabIA[I-2][y]!='x'){   // OLHA SE ACIMA TEM AGUA E SE ACERTOU O TIRO ANTERIOR
             --I;
         }
-        else{                                                           // SE NÃO
+        else{                                                           // SE Nï¿½O
             if(tabIA[x][J+1]=='~'&&tabIA[x][J]=='*'&&tabIA[x][J+2]!='x'){   // OLHA SE A DIREITA TEM AGUA E SE ACERTOU O TIRO ANTERIOR
                 ++J;
             }
-            else{                                                           // SE NÃO
+            else{                                                           // SE Nï¿½O
                 if(tabIA[x][J]==' '||J==COL-1||tabIA[x][J+1]==' '){             // OLHA SE ERROU O TIRO ANTERIOR
                     J=y;
                 }

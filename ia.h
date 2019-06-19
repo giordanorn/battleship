@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <dos.h>
-#include <windows.h>
+
 #define LIN 17
 #define COL 17
 
 typedef enum tab_ia{
-    WATER_IA, //ÁGUA
+    WATER_IA, //ï¿½GUA
     N1_IA,    //NAVIOS DE TAMANHO 1 2 3 E 4;
     N2_IA,
     N3_IA,
