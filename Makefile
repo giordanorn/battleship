@@ -15,3 +15,4 @@ battleship: main.c player.o ia.o
 
 clean:
 	rm -f player.o ia.o
+	rm -f battleship
