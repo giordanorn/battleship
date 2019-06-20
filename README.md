@@ -4,8 +4,8 @@ Este repositório mantém um jogo de [Batalha Naval](https://pt.wikipedia.org/wi
 Este projeto surgiu, durante o meu segundo semestre letivo (2016.1), como um trabalho da disciplina Introdução às Técnicas de Programação do curso Bacharelado em Tecnologia da Informação na UFRN.
 
 A disciplina foi lecionada pelos professores:
-- João Carlos Xavier Junior (Teoria)
-- André Maurício Cunha Campos (Prática)
+- João Carlos Xavier Junior (Teoria) - [Perfil acadêmico da UFRN](https://docente.ufrn.br/4351681/perfil).
+- André Maurício Cunha Campos (Prática) - [Perfil acadêmico da UFRN](https://docente.ufrn.br/1363515/perfil).
 
 Felizmente, o projeto foi muito bem avaliado e consegui minha aprovação na disciplina. :satisfied:
 
