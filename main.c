@@ -1,58 +1,73 @@
 #include "player.h"
 #include "ia.h"
 
-int main(){
+int
+main (void)
+{
     srand(time(NULL));
-    while(1){                   /// LOOP DO JOGO
+    while (1)
+    {                   /// LOOP DO JOGO
         ZeraBase();                     //ZERA AS MATRIZES DE BASE
         ZeraBaseIA();
         GeraNavios(basePL);             //GERA OS NAVIOS ALEARTORIAMENTE
         GeraNaviosIA(baseIA);
-        FormaMapa(tabPL);               //DA FORMATO AS MATRIZES CHAR QUE SERÃO IMPRESSAS
+        FormaMapa(tabPL);               //DA FORMATO AS MATRIZES CHAR QUE SERï¿½O IMPRESSAS
         FormaMapaIA(tabIA);
         BordaBase();                    //DAR VALOR AS BORDAS
         BordaBaseIA();
-        while(Menu());                  //MENU DO JOGO, É RETORNADO ZERO PARA CADA OPÇÃO DO MENU
-        if(!GeraAuto&&!Load){           //SE O JOGADOR DECIDIU ESCOLHER OS NAVIOS E CRIOU UM NOVO JOGO
-            ZeraBaseIA();                   //ZERA A MATRIZ DE INTEIROS, POIS AGORA O JOGADOR ESCOLHERÁ
-            EscolheNavios(baseIA);          //ESCOLHES OS NAVIOS NA MATRIZ DA IA, POIS É ELA QUEM VAI ATIRAR NOS NAVIOS QUE FORAM POSICIONADOS
-            FormaMapa(tabPL);               //DÁ FORMATO A MATRIZ CHAR NOVAMENTE, POIS FOI UTILIZADO NA HORA DE ESCOLHER OS NAVIOS
+        while (Menu());                  //MENU DO JOGO, ï¿½ RETORNADO ZERO PARA CADA OPï¿½ï¿½O DO MENU
+        if (!GeraAuto && !Load)
+        {           //SE O JOGADOR DECIDIU ESCOLHER OS NAVIOS E CRIOU UM NOVO JOGO
+            ZeraBaseIA();                   //ZERA A MATRIZ DE INTEIROS, POIS AGORA O JOGADOR ESCOLHERï¿½
+            EscolheNavios(baseIA);          //ESCOLHES OS NAVIOS NA MATRIZ DA IA, POIS ï¿½ ELA QUEM VAI ATIRAR NOS NAVIOS QUE FORAM POSICIONADOS
+            FormaMapa(tabPL);               //Dï¿½ FORMATO A MATRIZ CHAR NOVAMENTE, POIS FOI UTILIZADO NA HORA DE ESCOLHER OS NAVIOS
         }
-        if(Load){
+        if (Load)
+        {
             CarregaJogo();
         }
         ImprimeMapas();
-        while(winIA==0&&winPL==0){      /// A PARTIDA COMEÇA AQUI! SE ENCERRARÁ QUANDO ALGUM JOGADOR DESTRUIR TODOS OS NAVIOS
+        while (winIA == 0 && winPL == 0)
+        {      /// A PARTIDA COMEï¿½A AQUI! SE ENCERRARï¿½ QUANDO ALGUM JOGADOR DESTRUIR TODOS OS NAVIOS
             printf("\nTurno de JOGADOR\n");
-            while(1){                           /// VEZ DO JOGADOR, VAI REPETIR ENQUANTO ACERTAR OS TIROS
-                do{
+            while (1)
+            {                           /// VEZ DO JOGADOR, VAI REPETIR ENQUANTO ACERTAR OS TIROS
+                do
+                {
                     fflush(stdin);                  // LIMPA O BUFFER
                     linha();
                     coluna();
-                }while(VerificaTiro());
+                } while(VerificaTiro());
                 system("cls");
-                if(VerificaAcerto()){           // SE ACERTAR NA ÁGUA A ´R RETORNADO 1 PARA A FUNÇÃO E SAI DO LOOP DA VEZ DO JOGADOR
+                if (VerificaAcerto())
+                {           // SE ACERTAR NA ï¿½GUA A ï¿½R RETORNADO 1 PARA A FUNï¿½ï¿½O E SAI DO LOOP DA VEZ DO JOGADOR
                     break;
                 }
-                if(PLc1>=4 && PLc2>=3 && PLc3>=2 && PLc4>=1){   // VERIFICA SE O JOGADOR DESTRUIU TODOS OS NAVIOS
+                if (PLc1 >= 4 && PLc2 >= 3 && PLc3 >= 2 && PLc4 >= 1)
+                {   // VERIFICA SE O JOGADOR DESTRUIU TODOS OS NAVIOS
                     winPL++;
                     break;
                 }
             }
             SalvaJogo();
-            while(winPL==0&&winIA==0){          /// VEZ DA IA, VAI REPETIR ENQUANTO ACERTAR OS TIROS
+            while (winPL == 0 && winIA == 0)
+            {          /// VEZ DA IA, VAI REPETIR ENQUANTO ACERTAR OS TIROS
                 system("pause");
                 system("cls");
-                if(z==0){                               // SE NÃO TIVER NENHUM NAVIO NA MIRA
-                    GeraTiroIA(I,J);                           // GERA COORDENADA ALEARTORIA, QUE NÃO FOI ATIRADA AINDA
+                if (z == 0)
+                {                               // SE Nï¿½O TIVER NENHUM NAVIO NA MIRA
+                    GeraTiroIA(I,J);                           // GERA COORDENADA ALEARTORIA, QUE Nï¿½O FOI ATIRADA AINDA
                 }
-                else{                                   // SE TIVER ACERTADO UM NAVIO E NAO TIVER DESTRUIDO AINDA
+                else
+                {                                   // SE TIVER ACERTADO UM NAVIO E NAO TIVER DESTRUIDO AINDA
                     ProximoTiroIA();                        // TENTA ATIRAR NAS PROXIMIDADES
                 }
-                if(VerificaAcertoIA(I,J)){
+                if (VerificaAcertoIA(I,J))
+                {
                     break;
                 }
-                if(IAc1>=4 && IAc2>=3 && IAc3>=2 && IAc4>=1){// VERIFICA SE A IA DESTRUIU TODOS OS NAVIOS
+                if (IAc1 >= 4 && IAc2 >= 3 && IAc3 >= 2 && IAc4 >= 1)
+                {// VERIFICA SE A IA DESTRUIU TODOS OS NAVIOS
                     winIA++;
                     break;
                 }
@@ -62,10 +77,11 @@ int main(){
         ImprimeMapas();
         VerificaVencedor(winIA);
         ApagaSave();
-        if(JogarNovamente()){           // SE O JOGADOR ESCOLHEU JOGAR NOVAMENTE RETORNA 1 E REPETE O LOOP
+        if (JogarNovamente())
+        {           // SE O JOGADOR ESCOLHEU JOGAR NOVAMENTE RETORNA 1 E REPETE O LOOP
             continue;
         }
-        break;                          // SE NÃO, SAI DO LOOP
+        break;                          // SE Nï¿½O, SAI DO LOOP
     }
     return 0;
 }
