@@ -52,7 +52,7 @@ main (void)
             SalvaJogo();
             while (winPL == 0 && winIA == 0)
             {          /// VEZ DA IA, VAI REPETIR ENQUANTO ACERTAR OS TIROS
-                system("pause");
+                system("read -p \"Pressione enter para continuar...\" saindo");
                 system("clear");
                 if (z == 0)
                 {                               // SE N�O TIVER NENHUM NAVIO NA MIRA

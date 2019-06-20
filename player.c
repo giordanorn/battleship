@@ -23,7 +23,7 @@ Instrucoes(void)
     printf("* Ao acertar um disparo, o jogador podera atirar novamente;\n\n");
     printf("* Para cada vez que a IA for jogar, voce devera apertar qualquer tecla para \n  poder prosseguir.\n\n");
     printf("* ");
-    system("pause");
+    system("read -p \"Pressione enter para sair...\" saindo");
     system("clear");
 }
 
