@@ -3,7 +3,7 @@ Este repositório mantém um jogo de [Batalha Naval](https://pt.wikipedia.org/wi
 
 Este projeto surgiu, durante o meu segundo semestre letivo (2016.1), como um trabalho da disciplina Introdução às Técnicas de Programação do curso Bacharelado em Tecnologia da Informação na UFRN.
 
-A disciplina foi lecionadas pelos professores:
+A disciplina foi lecionada pelos professores:
 - João Carlos Xavier Junior (Teoria)
 - André Maurício Cunha Campos (Prática)
 
@@ -15,7 +15,7 @@ Em relação aos requisitos impostos pelo trabalho acadêmico, o projeto ficou 1
 Pois, como se pode ver, a implementação não é a das melhores. :grimacing:
 
 # Instruções
-Primairamente, clone o repositório em algum diretório que desejar, em seguida compile o programa. Para isso, execute a seguinte sequência de comandos em um terminal:
+Primeiramente, clone o repositório em algum diretório que desejar, em seguida compile o programa. Para isso, execute a seguinte sequência de comandos em um terminal:
 ```sh
 git clone https://github.com/giordanorn/battleship
 cd battleship
