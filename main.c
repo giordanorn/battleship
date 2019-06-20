@@ -38,7 +38,7 @@ main (void)
                     linha();
                     coluna();
                 } while(VerificaTiro());
-                system("cls");
+                system("clear");
                 if (VerificaAcerto())
                 {           // SE ACERTAR NA �GUA A �R RETORNADO 1 PARA A FUN��O E SAI DO LOOP DA VEZ DO JOGADOR
                     break;
@@ -53,7 +53,7 @@ main (void)
             while (winPL == 0 && winIA == 0)
             {          /// VEZ DA IA, VAI REPETIR ENQUANTO ACERTAR OS TIROS
                 system("pause");
-                system("cls");
+                system("clear");
                 if (z == 0)
                 {                               // SE N�O TIVER NENHUM NAVIO NA MIRA
                     GeraTiroIA(I,J);                           // GERA COORDENADA ALEARTORIA, QUE N�O FOI ATIRADA AINDA

@@ -7,7 +7,7 @@ int GeraAuto=1, Load=0;                                  // VARIAVEIS QUE AUXILI
 void
 Instrucoes(void)
 {
-    system("cls");
+    system("clear");
     printf("-------------------  BATALHA NAVAL -------------------\n\n");
     printf("Informacoes gerais:\n");
     printf("-  Existem dois mapas, um para o jogador e um para a IA;\n\n");
@@ -24,7 +24,7 @@ Instrucoes(void)
     printf("* Para cada vez que a IA for jogar, voce devera apertar qualquer tecla para \n  poder prosseguir.\n\n");
     printf("* ");
     system("pause");
-    system("cls");
+    system("clear");
 }
 
 int
@@ -35,7 +35,7 @@ Menu(void)
     while((s[0]<'1'||s[0]>'5')||s[1]!=0)
     {
         s[1]=0;
-        system("cls");
+        system("clear");
         printf("-------------------  BATALHA NAVAL -------------------\n\n");
         printf("- Menu\n");
         printf("\t(1)-Novo Jogo\n");
@@ -456,7 +456,7 @@ ImprimeMapa (void)
 void
 ImprimeMapas (void)
 {                            // IMPRIME AMBOS OS MAPAS J� FORMATADOS
-    system("cls");
+    system("clear");
     printf("\t      JOGADOR\n");
     ImprimeMapa();
     printf("\n\n\t    OPONENTE IA\n");
@@ -859,7 +859,7 @@ EscolheNavios (int base[][COL])
     int v,c,i,j;
     for(c=1;c;c--)
     {               // ESCOLHE PORTA-AVIOES(NAVIO DE 4)
-        system("cls");
+        system("clear");
         ImprimeEscolheNavio();
         printf("Navio: Porta-avioes - Tamanho 4 (Restam 1)\n");
         v=VH();
@@ -899,7 +899,7 @@ EscolheNavios (int base[][COL])
     }
     for(c=2;c;c--)
     {               // ESCOLHE FRAGATAS(NAVIO DE 3)
-        system("cls");
+        system("clear");
         ImprimeEscolheNavio();
         printf("Navio: Fragata - Tamanho 3 (Restam %i)\n",c);
         v=VH();
@@ -939,7 +939,7 @@ EscolheNavios (int base[][COL])
     }
     for(c=3;c;c--)
     {               // ESCOLHE CORVETAS(NAVIO DE 2)
-        system("cls");
+        system("clear");
         ImprimeEscolheNavio();
         printf("Navio: Corveta - Tamanho 2 (Restam %i)\n",c);
         v=VH();                    // ESCOLHE SE O BARCO VAI SER NA HORIZONTAL OU VERTICAL
@@ -979,7 +979,7 @@ EscolheNavios (int base[][COL])
     }
     for(c=4;c;c--)
     {               // ESCOLHE SUBMARINOS(NAVIO DE 1)
-        system("cls");
+        system("clear");
         ImprimeEscolheNavio();
         printf("Navio: Submarino - tamanho 1 (restam %i)\n",c);
         i=LinhaEscolherNavio(LIN-2);
