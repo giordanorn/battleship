@@ -10,6 +10,7 @@ main (void)
     switch (option)
     {
         case EXIT_GAME:
+            printf ("Bye.\n");
             exit (0);
             break;
         case NEW_GAME:
