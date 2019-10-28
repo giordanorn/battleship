@@ -11,14 +11,23 @@ typedef enum {
     LOAD_GAME
 } MenuOption;
 
+typedef enum {
+    WATER,
+    CARRIER,	
+    BATTLESHIP,
+    DESTROYER,
+    SUBMARINE,
+    PATROL_BOAT
+} Point;
+
+typedef Point Grid[10][10];
+
 typedef struct {
     char owner[16];
     int width;
     int height;
-    int grid[10][10];
+    Grid grid;
 } Board;
-
-typedef int Grid[10][10];
 
 /*
  * Procedures
@@ -29,6 +38,6 @@ void load_game (void);
 void display_menu (void);
 MenuOption get_menu_option (void);
 void print_board (Board);
-void randomize_grid (Grid);
+void initialize_board (Board);
 
 #endif

@@ -18,14 +18,16 @@ start_new_game (void)
         .height = 10
     };
     
-    randomize_grid (player.grid);
-    randomize_grid (enemy.grid);
+    initialize_board (player);
+    initialize_board (enemy);
 
     // printing is for debugging purposes :P
     print_board (player); 
     print_board (enemy);
 
-    setup_boards ();
+    //setup_board (player);
+    //setup_board (enemy);
+    
     start_game ();
 }
 
@@ -64,9 +66,9 @@ print_board (Board board)
 }
 
 void
-randomize_grid (Grid grid)
+initialize_board (Board board)
 {
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 10; j++)
-            grid[i][j] = 42;
+    for (int i = 0; i < board.height; i++)
+        for (int j = 0; j < board.width; j++)
+            board.grid[i][j] = WATER;
 }
