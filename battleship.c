@@ -5,9 +5,8 @@
 int
 main (void)
 {
-
-    MenuOption option = display_menu ();
-
+    display_menu ();
+    MenuOption option = get_menu_option ();
     switch (option)
     {
         case EXIT_GAME:
@@ -23,6 +22,5 @@ main (void)
             printf ("Unrecognized option %d. Exiting game...\n", option);
             break;
     }
- 
     return 0;
 }

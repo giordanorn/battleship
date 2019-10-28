@@ -18,6 +18,7 @@ typedef enum {
 
 void start_new_game (void);
 void load_game (void);
-MenuOption display_menu (void);
+void display_menu (void);
+MenuOption get_menu_option (void);
 
 #endif

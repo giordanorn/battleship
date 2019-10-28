@@ -15,8 +15,20 @@ load_game (void)
 }
 
 MenuOption
+get_menu_option (void)
+{
+    printf ("Please, choose an option from menu options.\n");
+    printf ("> ");
+    MenuOption option;
+    scanf ("%d", &option);
+    return option;
+}
+
+void
 display_menu (void)
 {
-    printf ("MenuOption display_menu (void) method is currently in progress. Exiting...\n");
-    exit (1);
+    printf ("Battleship Game - Menu:\n");
+    printf ("0 - Exit\n");
+    printf ("1 - Start new game\n");
+    printf ("2 - Load previous game\n");
 }
