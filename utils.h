@@ -18,6 +18,8 @@ typedef struct {
     int grid[10][10];
 } Board;
 
+typedef int Grid[10][10];
+
 /*
  * Procedures
  */
@@ -27,5 +29,6 @@ void load_game (void);
 void display_menu (void);
 MenuOption get_menu_option (void);
 void print_board (Board);
+void randomize_grid (Grid);
 
 #endif

@@ -15,10 +15,13 @@ start_new_game (void)
     Board enemy = {
         .owner  = "Enemy",
         .width  = 10,
-        .height = 10,
+        .height = 10
     };
     
-    // only for debug purposes :P
+    randomize_grid (player.grid);
+    randomize_grid (enemy.grid);
+
+    // printing is for debugging purposes :P
     print_board (player); 
     print_board (enemy);
 
@@ -58,4 +61,12 @@ print_board (Board board)
     for (int i = 0; i < board.height; i++)
         for (int j = 0; j < board.width; j++)
             printf ("board.grid[%d][%d] = %d\n", i, j, board.grid[i][j]);
+}
+
+void
+randomize_grid (Grid grid)
+{
+    for (int i = 0; i < 10; i++)
+        for (int j = 0; j < 10; j++)
+            grid[i][j] = 42;
 }
