@@ -1,24 +1,22 @@
 #include "utils.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void
-set_grid_empty (Grid *grid, int rows, int cols)
+start_new_game (void)
 {
-    for (int i = 0; i < rows*cols; ++i)
-	{
-        grid[i] = EMPTY;
-	}
+    printf ("void start_new_game (void) method is currently in progress. Exiting...\n");
 }
 
 void
-print_grid (Grid *grid, int rows, int cols)
+load_game (void)
 {
-    for (int i = 0; i < rows; ++i)
-	{
-		for (int j = 0; j < cols; ++j)
-		{
-			printf ("%c ", grid[i] + 97);
-		}
-		printf ("\n");
-	}
+    printf ("void load_game (void) method is currently in progress. Exiting...\n");
+}
+
+MenuOption
+display_menu (void)
+{
+    printf ("MenuOption display_menu (void) method is currently in progress. Exiting...\n");
+    exit (1);
 }

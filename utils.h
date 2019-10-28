@@ -6,16 +6,18 @@
  */
 
 typedef enum {
-    EMPTY,
-    SHIP_OF_TYPE_1,
-    SHIP_OF_TYPE_2
-} Grid;
+    EXIT_GAME,
+    NEW_GAME,
+    LOAD_GAME
+} MenuOption;
+
 
 /*
  * Procedures
  */
 
-void set_grid_empty (Grid *, int, int);
-void print_grid (Grid *, int, int);
+void start_new_game (void);
+void load_game (void);
+MenuOption display_menu (void);
 
 #endif

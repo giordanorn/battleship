@@ -5,13 +5,24 @@
 int
 main (void)
 {
-    const int ROWS = 10;
-    const int COLS = 10;
 
-    Grid *player_grid = (Grid *) calloc (ROWS * COLS, sizeof(Grid));
+    MenuOption option = display_menu ();
 
-    print_grid (player_grid, ROWS, COLS);
-    set_grid_empty (player_grid, ROWS, COLS);
+    switch (option)
+    {
+        case EXIT_GAME:
+            exit (0);
+            break;
+        case NEW_GAME:
+            start_new_game ();
+            break;
+        case LOAD_GAME:
+            load_game ();
+            break;
+        default:
+            printf ("Unrecognized option %d. Exiting game...\n", option);
+            break;
+    }
  
     return 0;
 }
