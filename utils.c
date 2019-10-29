@@ -128,27 +128,39 @@ insert_ship (Board *board, int ship_size, Point ship_type)
         bool
         seed_validity_check (int x, int y)
         {
+            // check the left corners (up, middle and down)
+            if ( x != 0 )
+            {
+                if ( board->grid[y][x - 1] != WATER )
+                    return false;
+                if ( y != 0 )
+                   if ( board->grid[y - 1][x - 1] != WATER )
+                       return false;
+                if ( y != board->height - 1 )
+                    if ( board->grid[y + 1][x - 1] != WATER )
+                        return false;
+            }
+            // check the right corners (up, middle and down)
+            if ( x != board->width - 1 )
+            {
+                if ( board->grid[y][x + ship_size] != WATER )
+                    return false;
+                if ( y != 0 )
+                   if ( board->grid[y - 1][x + ship_size] != WATER )
+                       return false;
+                if ( y != board->height - 1 )
+                    if ( board->grid[y + 1][x + ship_size] != WATER )
+                        return false;
+            }
+            // check the up an downwards the ship
             for (int i = 0; i < ship_size; ++i)
             {
-                // conditions for avoiding accessing non-existent coordinates
-                if ( y == 0 )
-                    if (
-                        board->grid[  y  ][x + i] != WATER ||
-                        board->grid[y + 1][x + i] != WATER
-                       )
+                if ( board->grid[y][x + i] != WATER ) return false;
+                if ( y != 0 )
+                    if ( board->grid[y - 1][x + i] != WATER )
                         return false;
-                else if ( y == board->height - 1 )
-                    if (
-                        board->grid[y - 1][x + i] != WATER ||
-                        board->grid[  y  ][x + i] != WATER
-                       )
-                        return false;
-                else
-                    if (
-                        board->grid[y - 1][x + i] != WATER ||
-                        board->grid[  y  ][x + i] != WATER ||
-                        board->grid[y + 1][x + i] != WATER
-                       )
+                if ( y != board->height - 1 )
+                    if ( board->grid[y + 1][x + i] != WATER )
                         return false;
             }
             return true;
@@ -169,9 +181,52 @@ insert_ship (Board *board, int ship_size, Point ship_type)
     }
     else
     {
+        bool
+        seed_validity_check (int x, int y)
+        {
+            // check the upwards (left, center and right)
+            if ( y != 0 )
+            {
+                if ( board->grid[y - 1][x] != WATER )
+                    return false;
+                if ( x != 0 )
+                   if ( board->grid[y - 1][x - 1] != WATER )
+                       return false;
+                if ( x != board->width - 1 )
+                    if ( board->grid[y - 1][x + 1] != WATER )
+                        return false;
+            }
+            // check the downwards (left, center and right)
+            if ( y != board->height - 1 )
+            {
+                if ( board->grid[y + ship_size][x] != WATER )
+                    return false;
+                if ( x != 0 )
+                   if ( board->grid[y + ship_size][x - 1] != WATER )
+                       return false;
+                if ( x != board->width - 1 )
+                    if ( board->grid[y + ship_size][x + 1] != WATER )
+                        return false;
+            }
+            // check the sides of the ship
+            for (int i = 0; i < ship_size; ++i)
+            {
+                if ( board->grid[y + i][x] != WATER ) return false;
+                if ( x != 0 )
+                    if ( board->grid[y + i][x - 1] != WATER )
+                        return false;
+                if ( x != board->height - 1 )
+                    if ( board->grid[y + i][x + 1] != WATER )
+                        return false;
+            }
+            return true;
+        }
+
         int xseed, yseed;
-        xseed = rand () % board->width;
-        yseed = rand () % (board->height - ship_size);
+        do {
+            xseed = rand () % board->width;
+            yseed = rand () % (board->height - ship_size);
+        } while ( ! seed_validity_check (xseed, yseed) );
 
         printf ("Inserting a ship of size %d at coordinate (%d,%d) in vertical orientation.\n", ship_size, xseed, yseed);
 
