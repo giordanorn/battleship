@@ -4,15 +4,12 @@ all: build
 
 build: battleship
 
-player.o: player.c
-	gcc -c player.c -o player.o
+battleship: battleship.c utils.o
+	gcc battleship.c utils.o -o battleship
 
-ia.o: ia.c
-	gcc -c ia.c -o ia.o
-
-battleship: main.c player.o ia.o
-	gcc main.c player.o ia.o -o battleship
+utils.o: utils.c
+	gcc -c utils.c -o utils.o
 
 clean:
-	rm -f player.o ia.o
+	rm -f utils.o
 	rm -f battleship
