@@ -9,15 +9,15 @@ void
 start_new_game (void)
 {
     Board player = {
-        .owner  = "Player",
-        .width  = 10,
-        .height = 10
+        .owner             = "Player",
+        .width             = 10,
+        .height            = 10,
     };
 
     Board enemy = {
-        .owner  = "Enemy",
-        .width  = 10,
-        .height = 10
+        .owner             = "Enemy",
+        .width             = 10,
+        .height            = 10,
     };
     
     initialize_board (&player);
@@ -69,10 +69,15 @@ print_board (Board *board)
         for (int j = 0; j < board->width; j++)
         {
             if ( board->hitmap[i][j] == SHOT )
-                if ( board->shipmap[i][j] == WATER )
+                if ( board->shipmap[i][j] == NULL )
                     printf (" %c", ' ');
                 else
-                    printf (" %c", '*');
+                {
+                    if ( board->shipmap[i][j]->health == 0 )
+                        printf (" %c", 'x');
+                    else
+                        printf (" %c", '*');
+                }
             else 
                 printf (" %c", '~');
         }
@@ -83,10 +88,42 @@ print_board (Board *board)
 void
 initialize_board (Board *board)
 {
+    Ship carrier = {
+        .name      = "Carrier",
+        .size      = 5,
+        .health    = 5
+    };
+    Ship battleship = {
+        .name   = "Battleship",
+        .size   = 4,
+        .health = 4
+    };
+    Ship destroyer = {
+        .name    = "Destroyer",
+        .size    = 3,
+        .health  = 3
+    };
+    Ship submarine = {
+        .name    = "Submarine",
+        .size    = 3,
+        .health  = 3
+    };
+    Ship patrolboat = {
+        .name   = "Patrol Boat",
+        .size   = 2,
+        .health = 2
+    };
+
+    board->carrier    = carrier;
+    board->battleship = battleship;
+    board->destroyer  = destroyer;
+    board->submarine  = submarine;
+    board->patrolboat = patrolboat;
+
     for (int i = 0; i < board->height; i++)
         for (int j = 0; j < board->width; j++)
         {
-            board->shipmap[i][j] = WATER;
+            board->shipmap[i][j] = NULL;
             board->hitmap[i][j] = FREE;
         }
 }
@@ -94,45 +131,15 @@ initialize_board (Board *board)
 void
 setup_ships (Board *board)
 {
-    insert_carrier (board);
-    insert_battleship (board);
-    insert_destroyer (board);
-    insert_submarine (board);
-    insert_patrol_boat (board);
+    insert_ship (board, board->carrier.size,    &board->carrier);
+    insert_ship (board, board->battleship.size, &board->battleship);
+    insert_ship (board, board->destroyer.size,  &board->destroyer);
+    insert_ship (board, board->submarine.size,  &board->submarine);
+    insert_ship (board, board->patrolboat.size, &board->patrolboat);
 }
 
 void
-insert_carrier (Board *board)
-{
-    insert_ship (board, 5, CARRIER);
-}
-
-void
-insert_battleship (Board *board)
-{
-    insert_ship (board, 4, BATTLESHIP);
-}
-
-void
-insert_destroyer (Board *board)
-{
-    insert_ship (board, 3, DESTROYER);
-}
-
-void
-insert_submarine (Board *board)
-{
-    insert_ship (board, 3, SUBMARINE);
-}
-
-void
-insert_patrol_boat (Board *board)
-{
-    insert_ship (board, 2, PATROL_BOAT);
-}
-
-void
-insert_ship (Board *board, int ship_size, Water ship_type)
+insert_ship (Board *board, int ship_size, Ship *ship)
 {
     Orientation orientation = rand () % 2;
     if (orientation == HORIZONTAL)
@@ -143,36 +150,36 @@ insert_ship (Board *board, int ship_size, Water ship_type)
             // check the left corners (up, middle and down)
             if ( x != 0 )
             {
-                if ( board->shipmap[y][x - 1] != WATER )
+                if ( board->shipmap[y][x - 1] != NULL )
                     return false;
                 if ( y != 0 )
-                   if ( board->shipmap[y - 1][x - 1] != WATER )
+                   if ( board->shipmap[y - 1][x - 1] != NULL )
                        return false;
                 if ( y != board->height - 1 )
-                    if ( board->shipmap[y + 1][x - 1] != WATER )
+                    if ( board->shipmap[y + 1][x - 1] != NULL )
                         return false;
             }
             // check the right corners (up, middle and down)
             if ( x != board->width - 1 )
             {
-                if ( board->shipmap[y][x + ship_size] != WATER )
+                if ( board->shipmap[y][x + ship_size] != NULL )
                     return false;
                 if ( y != 0 )
-                   if ( board->shipmap[y - 1][x + ship_size] != WATER )
+                   if ( board->shipmap[y - 1][x + ship_size] != NULL )
                        return false;
                 if ( y != board->height - 1 )
-                    if ( board->shipmap[y + 1][x + ship_size] != WATER )
+                    if ( board->shipmap[y + 1][x + ship_size] != NULL )
                         return false;
             }
             // check the up an downwards the ship
             for (int i = 0; i < ship_size; ++i)
             {
-                if ( board->shipmap[y][x + i] != WATER ) return false;
+                if ( board->shipmap[y][x + i] != NULL ) return false;
                 if ( y != 0 )
-                    if ( board->shipmap[y - 1][x + i] != WATER )
+                    if ( board->shipmap[y - 1][x + i] != NULL )
                         return false;
                 if ( y != board->height - 1 )
-                    if ( board->shipmap[y + 1][x + i] != WATER )
+                    if ( board->shipmap[y + 1][x + i] != NULL )
                         return false;
             }
             return true;
@@ -187,7 +194,7 @@ insert_ship (Board *board, int ship_size, Water ship_type)
 
         // inserts ship for real
         for (int i = 0; i < ship_size; ++i)
-            board->shipmap[yseed][xseed + i] = ship_type;
+            board->shipmap[yseed][xseed + i] = ship;
     }
     else
     {
@@ -197,36 +204,36 @@ insert_ship (Board *board, int ship_size, Water ship_type)
             // check the upwards (left, center and right)
             if ( y != 0 )
             {
-                if ( board->shipmap[y - 1][x] != WATER )
+                if ( board->shipmap[y - 1][x] != NULL )
                     return false;
                 if ( x != 0 )
-                   if ( board->shipmap[y - 1][x - 1] != WATER )
+                   if ( board->shipmap[y - 1][x - 1] != NULL )
                        return false;
                 if ( x != board->width - 1 )
-                    if ( board->shipmap[y - 1][x + 1] != WATER )
+                    if ( board->shipmap[y - 1][x + 1] != NULL )
                         return false;
             }
             // check the downwards (left, center and right)
             if ( y != board->height - 1 )
             {
-                if ( board->shipmap[y + ship_size][x] != WATER )
+                if ( board->shipmap[y + ship_size][x] != NULL )
                     return false;
                 if ( x != 0 )
-                   if ( board->shipmap[y + ship_size][x - 1] != WATER )
-                       return false;
+                    if ( board->shipmap[y + ship_size][x - 1] != NULL )
+                        return false;
                 if ( x != board->width - 1 )
-                    if ( board->shipmap[y + ship_size][x + 1] != WATER )
+                    if ( board->shipmap[y + ship_size][x + 1] != NULL )
                         return false;
             }
             // check the sides of the ship
             for (int i = 0; i < ship_size; ++i)
             {
-                if ( board->shipmap[y + i][x] != WATER ) return false;
+                if ( board->shipmap[y + i][x] != NULL ) return false;
                 if ( x != 0 )
-                    if ( board->shipmap[y + i][x - 1] != WATER )
+                    if ( board->shipmap[y + i][x - 1] != NULL )
                         return false;
                 if ( x != board->height - 1 )
-                    if ( board->shipmap[y + i][x + 1] != WATER )
+                    if ( board->shipmap[y + i][x + 1] != NULL )
                         return false;
             }
             return true;
@@ -239,7 +246,7 @@ insert_ship (Board *board, int ship_size, Water ship_type)
         } while ( ! seed_validity_check (xseed, yseed) );
 
         for (int i = 0; i < ship_size; ++i)
-            board->shipmap[yseed + i][xseed] = ship_type;
+            board->shipmap[yseed + i][xseed] = ship;
     }
 }
 
@@ -269,9 +276,7 @@ play_turn (Board *board)
 {
     Shot attempt;
     do {
-
         print_board (board);
-
         int x, y;
         
         // TODO check invalid inputs and all of those good shit
@@ -294,20 +299,23 @@ fire (Board *board, int x, int y)
     if (board->hitmap[x][y] == FREE)
     {
         board->hitmap[x][y] = SHOT;
-        if (board->shipmap[x][y] == WATER)
+        if ( board->shipmap[x][y] == NULL )
         {
             printf ("# You shot the water.\n");
             return MISS;
         }
         else
         {
-            printf ("# Nice shot, you got it!\n");
+            printf ("# Nice shot, you hit it!\n");
+            board->shipmap[x][y]->health--;
+            if ( board->shipmap[x][y]->health == 0 )
+                printf ("# Great! You destroyed a %s.\n", board->shipmap[x][y]->name );
             return HIT;
         }
     }
     else
     {
-        printf ("# You already shot this place, dammit!\n");
+        printf ("# You already shot at this place, please try again.\n");
         return HIT;
     }
 }

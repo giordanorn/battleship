@@ -11,22 +11,22 @@ typedef enum {
     LOAD_GAME
 } MenuOption;
 
-typedef enum {
-    WATER,
-    CARRIER,	// it occupies 5 points
-    BATTLESHIP, // it occupies 4 points
-    DESTROYER,  // it occupies 3 points
-    SUBMARINE,  // it occupies 3 points
-    PATROL_BOAT // it occupies 2 points
-} Water;
+typedef struct {
+    char name[16];
+    int size;
+    int health;
+} Ship;
 
-typedef enum {
-    FREE,
-    SHOT
-} Target;
+typedef Ship* Water;
 
 // Back layer
 typedef Water ShipMap[10][10];
+
+typedef enum {
+    FREE,
+    SHOT,
+    SANK
+} Target;
 
 // Front layer
 typedef Target HitMap[10][10];
@@ -37,6 +37,11 @@ typedef struct {
     int height;
     ShipMap shipmap;
     HitMap hitmap;
+    Ship carrier;
+    Ship battleship;
+    Ship destroyer;
+    Ship submarine;
+    Ship patrolboat;
 } Board;
 
 typedef enum {
@@ -61,12 +66,12 @@ MenuOption get_menu_option (void);
 void print_board (Board*);
 void initialize_board (Board*);
 void setup_ships (Board*);
-void insert_ship (Board*, int, Water);
+void insert_ship (Board*, int, Ship*);
 void insert_carrier (Board*);
 void insert_battleship (Board*);
 void insert_destroyer (Board*);
 void insert_submarine (Board*);
-void insert_patrol_boat (Board*);
+void insert_patrolboat (Board*);
 void play_turn (Board*);
 Shot fire (Board*, int, int);
 
