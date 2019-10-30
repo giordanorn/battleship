@@ -59,10 +59,12 @@ void
 print_board (Board *board)
 {
     printf ("# %s's board:\n", board->owner);
+
     printf (" ");
-    for (int i = 0; i < board->height; i++)
-        printf (" %d", i);
+    for (int j = 0; j < board->width; j++)
+        printf (" %d", j);
     printf ("\n");
+
     for (int i = 0; i < board->height; i++)
     {
         printf ("%d", i);
@@ -280,14 +282,13 @@ play_turn (Board *board)
         int x, y;
         
         // TODO check invalid inputs and all of those good shit
-        printf ("# Enter the coordinates x and y of your target respectively:\n");
+        printf ("# Enter the line and column of your target respectively:\n");
         printf ("> ");
         scanf ("%d %d", &x, &y);
 
-        // inverted axes for respect the logic of matrices indexes
         printf ("# Fire!\n");
         sleep (1);
-        attempt = fire (board, y, x);
+        attempt = fire (board, x, y);
         sleep (1);
     } while ( attempt == HIT );
     print_board (board);
@@ -306,10 +307,10 @@ fire (Board *board, int x, int y)
         }
         else
         {
-            printf ("# Nice shot, you hit it!\n");
+            printf ("# Nice shot, you hit something!\n");
             board->shipmap[x][y]->health--;
             if ( board->shipmap[x][y]->health == 0 )
-                printf ("# Great! You destroyed a %s.\n", board->shipmap[x][y]->name );
+                printf ("# Great! You sank a %s.\n", board->shipmap[x][y]->name );
             return HIT;
         }
     }
