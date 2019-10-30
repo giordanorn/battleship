@@ -26,10 +26,6 @@ start_new_game (void)
     setup_ships (&player);
     setup_ships (&enemy);
 
-    // printing is for debugging purposes :P
-    print_board (player); 
-    print_board (enemy);
-    
     start_game (&player, &enemy);
 }
 
@@ -59,23 +55,26 @@ get_menu_option (void)
 }
 
 void
-print_board (Board board)
+print_board (Board *board)
 {
-    printf ("%s's board:\n", board.owner);
-
-    printf ("- Ship Map:\n");
-    for (int i = 0; i < board.height; i++)
+    printf ("%s's board:\n", board->owner);
+    printf (" ");
+    for (int i = 0; i < board->height; i++)
+        printf (" %d", i);
+    printf ("\n");
+    for (int i = 0; i < board->height; i++)
     {
-        for (int j = 0; j < board.width; j++)
-            printf (" %d", board.shipmap[i][j]);
-        printf ("\n");
-    }
-
-    printf ("- Hit Map:\n");
-    for (int i = 0; i < board.height; i++)
-    {
-        for (int j = 0; j < board.width; j++)
-            printf (" %d", board.hitmap[i][j]);
+        printf ("%d", i);
+        for (int j = 0; j < board->width; j++)
+        {
+            if ( board->hitmap[i][j] == SHOT )
+                if ( board->shipmap[i][j] == WATER )
+                    printf (" %c", ' ');
+                else
+                    printf (" %c", '*');
+            else 
+                printf (" %c", '~');
+        }
         printf ("\n");
     }
 }
@@ -185,8 +184,6 @@ insert_ship (Board *board, int ship_size, Water ship_type)
             yseed = rand () % board->height;
         } while ( ! seed_validity_check (xseed, yseed) );
 
-        printf ("Inserting a ship of size %d at coordinate (%d,%d) in horizontal orientation.\n", ship_size, xseed, yseed);
-
         // inserts ship for real
         for (int i = 0; i < ship_size; ++i)
             board->shipmap[yseed][xseed + i] = ship_type;
@@ -240,8 +237,6 @@ insert_ship (Board *board, int ship_size, Water ship_type)
             yseed = rand () % (board->height - ship_size);
         } while ( ! seed_validity_check (xseed, yseed) );
 
-        printf ("Inserting a ship of size %d at coordinate (%d,%d) in vertical orientation.\n", ship_size, xseed, yseed);
-
         for (int i = 0; i < ship_size; ++i)
             board->shipmap[yseed + i][xseed] = ship_type;
     }
@@ -250,7 +245,6 @@ insert_ship (Board *board, int ship_size, Water ship_type)
 void
 start_game (Board *player, Board *enemy)
 {
-    //game_loop ();
     while (true)
     {
         printf ("%s's turn now.\n", player->owner);
@@ -268,6 +262,9 @@ play_turn (Board *board)
 {
     Shot attempt;
     do {
+
+        print_board (board);
+
         int x, y;
         
         // TODO check invalid inputs and all of those good shit

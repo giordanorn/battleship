@@ -57,7 +57,7 @@ void start_game (Board*, Board*);
 void load_game (void);
 void display_menu (void);
 MenuOption get_menu_option (void);
-void print_board (Board);
+void print_board (Board*);
 void initialize_board (Board*);
 void setup_ships (Board*);
 void insert_ship (Board*, int, Water);
