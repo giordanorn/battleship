@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 void
 start_new_game (void)
@@ -57,7 +58,7 @@ get_menu_option (void)
 void
 print_board (Board *board)
 {
-    printf ("%s's board:\n", board->owner);
+    printf ("# %s's board:\n", board->owner);
     printf (" ");
     for (int i = 0; i < board->height; i++)
         printf (" %d", i);
@@ -247,13 +248,19 @@ start_game (Board *player, Board *enemy)
 {
     while (true)
     {
-        printf ("%s's turn now.\n", player->owner);
+        printf ("# %s's turn now.\n", player->owner);
+        sleep (1);
         play_turn (player);
-        printf ("%s's turn is over.\n", player->owner);
+        sleep (2);
+        printf ("# %s's turn is over.\n", player->owner);
+        sleep (2);
 
-        printf ("%s's turn now.\n", enemy->owner);
+        printf ("# %s's turn now.\n", enemy->owner);
+        sleep (1);
         play_turn (enemy);
-        printf ("%s's turn is over.\n", enemy->owner);
+        sleep (2);
+        printf ("# %s's turn is over.\n", enemy->owner);
+        sleep (2);
     }
 }
 
@@ -268,13 +275,17 @@ play_turn (Board *board)
         int x, y;
         
         // TODO check invalid inputs and all of those good shit
-        printf ("Enter the coordinates x and y of your target respectively:\n");
+        printf ("# Enter the coordinates x and y of your target respectively:\n");
         printf ("> ");
         scanf ("%d %d", &x, &y);
 
         // inverted axes for respect the logic of matrices indexes
+        printf ("# Fire!\n");
+        sleep (1);
         attempt = fire (board, y, x);
+        sleep (1);
     } while ( attempt == HIT );
+    print_board (board);
 }
 
 Shot
@@ -285,18 +296,18 @@ fire (Board *board, int x, int y)
         board->hitmap[x][y] = SHOT;
         if (board->shipmap[x][y] == WATER)
         {
-            printf ("You shot the water.\n");
+            printf ("# You shot the water.\n");
             return MISS;
         }
         else
         {
-            printf ("Nice shot, you got it!\n");
+            printf ("# Nice shot, you got it!\n");
             return HIT;
         }
     }
     else
     {
-        printf ("You already shot this place, dammit!\n");
+        printf ("# You already shot this place, dammit!\n");
         return HIT;
     }
 }

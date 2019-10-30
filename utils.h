@@ -48,6 +48,7 @@ typedef enum {
     MISS,
     HIT
 } Shot;
+
 /*
  * Procedures and functions
  */
