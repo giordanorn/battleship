@@ -30,7 +30,7 @@ start_new_game (void)
     print_board (player); 
     print_board (enemy);
     
-    start_game ();
+    start_game (&player, &enemy);
 }
 
 void
@@ -247,3 +247,59 @@ insert_ship (Board *board, int ship_size, Water ship_type)
     }
 }
 
+void
+start_game (Board *player, Board *enemy)
+{
+    //game_loop ();
+    while (true)
+    {
+        printf ("%s's turn now.\n", player->owner);
+        play_turn (player);
+        printf ("%s's turn is over.\n", player->owner);
+
+        printf ("%s's turn now.\n", enemy->owner);
+        play_turn (enemy);
+        printf ("%s's turn is over.\n", enemy->owner);
+    }
+}
+
+void
+play_turn (Board *board)
+{
+    Shot attempt;
+    do {
+        int x, y;
+        
+        // TODO check invalid inputs and all of those good shit
+        printf ("Enter the coordinates x and y of your target respectively:\n");
+        printf ("> ");
+        scanf ("%d %d", &x, &y);
+
+        // inverted axes for respect the logic of matrices indexes
+        attempt = fire (board, y, x);
+    } while ( attempt == HIT );
+}
+
+Shot
+fire (Board *board, int x, int y)
+{
+    if (board->hitmap[x][y] == FREE)
+    {
+        board->hitmap[x][y] = SHOT;
+        if (board->shipmap[x][y] == WATER)
+        {
+            printf ("You shot the water.\n");
+            return MISS;
+        }
+        else
+        {
+            printf ("Nice shot, you got it!\n");
+            return HIT;
+        }
+    }
+    else
+    {
+        printf ("You already shot this place, dammit!\n");
+        return HIT;
+    }
+}

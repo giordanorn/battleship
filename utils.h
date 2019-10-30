@@ -44,11 +44,16 @@ typedef enum {
     VERTICAL
 } Orientation;
 
+typedef enum {
+    MISS,
+    HIT
+} Shot;
 /*
  * Procedures and functions
  */
 
 void start_new_game (void);
+void start_game (Board*, Board*);
 void load_game (void);
 void display_menu (void);
 MenuOption get_menu_option (void);
@@ -61,5 +66,7 @@ void insert_battleship (Board*);
 void insert_destroyer (Board*);
 void insert_submarine (Board*);
 void insert_patrol_boat (Board*);
+void play_turn (Board*);
+Shot fire (Board*, int, int);
 
 #endif
