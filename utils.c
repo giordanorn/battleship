@@ -24,8 +24,8 @@ start_new_game (void)
     initialize_board (&enemy);
 
     srand (time (NULL));
-    setup_board (&player);
-    setup_board (&enemy);
+    setup_ships (&player);
+    setup_ships (&enemy);
 
     // printing is for debugging purposes :P
     print_board (player); 
@@ -63,10 +63,20 @@ void
 print_board (Board board)
 {
     printf ("%s's board:\n", board.owner);
+
+    printf ("- Ship Map:\n");
     for (int i = 0; i < board.height; i++)
     {
         for (int j = 0; j < board.width; j++)
-            printf (" %d", board.grid[i][j]);
+            printf (" %d", board.shipmap[i][j]);
+        printf ("\n");
+    }
+
+    printf ("- Hit Map:\n");
+    for (int i = 0; i < board.height; i++)
+    {
+        for (int j = 0; j < board.width; j++)
+            printf (" %d", board.hitmap[i][j]);
         printf ("\n");
     }
 }
@@ -76,11 +86,14 @@ initialize_board (Board *board)
 {
     for (int i = 0; i < board->height; i++)
         for (int j = 0; j < board->width; j++)
-            board->grid[i][j] = WATER;
+        {
+            board->shipmap[i][j] = WATER;
+            board->hitmap[i][j] = FREE;
+        }
 }
 
 void
-setup_board (Board *board)
+setup_ships (Board *board)
 {
     insert_carrier (board);
     insert_battleship (board);
@@ -120,7 +133,7 @@ insert_patrol_boat (Board *board)
 }
 
 void
-insert_ship (Board *board, int ship_size, Point ship_type)
+insert_ship (Board *board, int ship_size, Water ship_type)
 {
     Orientation orientation = rand () % 2;
     if (orientation == HORIZONTAL)
@@ -131,36 +144,36 @@ insert_ship (Board *board, int ship_size, Point ship_type)
             // check the left corners (up, middle and down)
             if ( x != 0 )
             {
-                if ( board->grid[y][x - 1] != WATER )
+                if ( board->shipmap[y][x - 1] != WATER )
                     return false;
                 if ( y != 0 )
-                   if ( board->grid[y - 1][x - 1] != WATER )
+                   if ( board->shipmap[y - 1][x - 1] != WATER )
                        return false;
                 if ( y != board->height - 1 )
-                    if ( board->grid[y + 1][x - 1] != WATER )
+                    if ( board->shipmap[y + 1][x - 1] != WATER )
                         return false;
             }
             // check the right corners (up, middle and down)
             if ( x != board->width - 1 )
             {
-                if ( board->grid[y][x + ship_size] != WATER )
+                if ( board->shipmap[y][x + ship_size] != WATER )
                     return false;
                 if ( y != 0 )
-                   if ( board->grid[y - 1][x + ship_size] != WATER )
+                   if ( board->shipmap[y - 1][x + ship_size] != WATER )
                        return false;
                 if ( y != board->height - 1 )
-                    if ( board->grid[y + 1][x + ship_size] != WATER )
+                    if ( board->shipmap[y + 1][x + ship_size] != WATER )
                         return false;
             }
             // check the up an downwards the ship
             for (int i = 0; i < ship_size; ++i)
             {
-                if ( board->grid[y][x + i] != WATER ) return false;
+                if ( board->shipmap[y][x + i] != WATER ) return false;
                 if ( y != 0 )
-                    if ( board->grid[y - 1][x + i] != WATER )
+                    if ( board->shipmap[y - 1][x + i] != WATER )
                         return false;
                 if ( y != board->height - 1 )
-                    if ( board->grid[y + 1][x + i] != WATER )
+                    if ( board->shipmap[y + 1][x + i] != WATER )
                         return false;
             }
             return true;
@@ -177,7 +190,7 @@ insert_ship (Board *board, int ship_size, Point ship_type)
 
         // inserts ship for real
         for (int i = 0; i < ship_size; ++i)
-            board->grid[yseed][xseed + i] = ship_type;
+            board->shipmap[yseed][xseed + i] = ship_type;
     }
     else
     {
@@ -187,36 +200,36 @@ insert_ship (Board *board, int ship_size, Point ship_type)
             // check the upwards (left, center and right)
             if ( y != 0 )
             {
-                if ( board->grid[y - 1][x] != WATER )
+                if ( board->shipmap[y - 1][x] != WATER )
                     return false;
                 if ( x != 0 )
-                   if ( board->grid[y - 1][x - 1] != WATER )
+                   if ( board->shipmap[y - 1][x - 1] != WATER )
                        return false;
                 if ( x != board->width - 1 )
-                    if ( board->grid[y - 1][x + 1] != WATER )
+                    if ( board->shipmap[y - 1][x + 1] != WATER )
                         return false;
             }
             // check the downwards (left, center and right)
             if ( y != board->height - 1 )
             {
-                if ( board->grid[y + ship_size][x] != WATER )
+                if ( board->shipmap[y + ship_size][x] != WATER )
                     return false;
                 if ( x != 0 )
-                   if ( board->grid[y + ship_size][x - 1] != WATER )
+                   if ( board->shipmap[y + ship_size][x - 1] != WATER )
                        return false;
                 if ( x != board->width - 1 )
-                    if ( board->grid[y + ship_size][x + 1] != WATER )
+                    if ( board->shipmap[y + ship_size][x + 1] != WATER )
                         return false;
             }
             // check the sides of the ship
             for (int i = 0; i < ship_size; ++i)
             {
-                if ( board->grid[y + i][x] != WATER ) return false;
+                if ( board->shipmap[y + i][x] != WATER ) return false;
                 if ( x != 0 )
-                    if ( board->grid[y + i][x - 1] != WATER )
+                    if ( board->shipmap[y + i][x - 1] != WATER )
                         return false;
                 if ( x != board->height - 1 )
-                    if ( board->grid[y + i][x + 1] != WATER )
+                    if ( board->shipmap[y + i][x + 1] != WATER )
                         return false;
             }
             return true;
@@ -231,7 +244,7 @@ insert_ship (Board *board, int ship_size, Point ship_type)
         printf ("Inserting a ship of size %d at coordinate (%d,%d) in vertical orientation.\n", ship_size, xseed, yseed);
 
         for (int i = 0; i < ship_size; ++i)
-            board->grid[yseed + i][xseed] = ship_type;
+            board->shipmap[yseed + i][xseed] = ship_type;
     }
 }
 
