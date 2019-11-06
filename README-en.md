@@ -4,8 +4,8 @@ This repository maintains a [Battleship game](https://en.wikipedia.org/wiki/Batt
 The project emerged during my second semester at University (2016.1), as an assignment from the course Introduction to Programming Techniques of the Information Technology bachelor degree at UFRN.
 
 The course was taught by:
-- Jo√o Carlos Xavier Junior (Theory) - [Academic profile from UFRN](https://docente.ufrn.br/4351681/perfil).
-- Andr√ Maur√cio Cunha Campos (Practice) - [Academic profile from UFRN](https://docente.ufrn.br/1363515/perfil).
+- Jo√£o Carlos Xavier Junior (Theory) - [Academic profile from UFRN](https://docente.ufrn.br/4351681/perfil).
+- Andr√© Maur√≠cio Cunha Campos (Practice) - [Academic profile from UFRN](https://docente.ufrn.br/1363515/perfil).
 
 Fortunately, the project was ... and I managed to pass the course. :satisfied:
 
